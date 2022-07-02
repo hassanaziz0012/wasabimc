@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<img src="{% static '/images/hills.png' %}" alt="" id="background">
+
+<section class="how-to-play">
+    <div class="container-sm">
+        <h2>How To Play</h2>
+
+        <ol>
+            <li>Make sure MetaMask app is installed in your browser.</li>
+            <li>Start by choosing the gaming mode you would like to play in.</li>
+            <p class="sub-item">
+                Higher risk = higher reward when you win!
+            </p>
+            <p class="sub-item">
+                If you've never played before, it's highly recommended to try Free mode to see how it works and to make
+                sure your minecraft is compatible with the server.
+            </p>
+            <li>Choose a character to help mold your gameplay style.</li>
+            <p class="sub-item">
+                Wanna just relax and watch the farm grow? Try out playing as a farmer.
+            </p>
+            <p class="sub-item">
+                Really enjoy digging straight down into lava pits? Try playing as the miner and get a boost to your
+                mining points.
+            </p>
+            <p class="sub-item">
+                Enjoy making the opponent suffer by your hand? Be a warrior and boost your kill points.
+            </p>
+            <li>Once the MetaMask payment has been processed, you will be whitelisted and given IP address for the next
+                match.</li>
+        </ol>
+
+        <h2>Points</h2>
+        <p>
+            At the start of every game, multiple items will be chosen at random. These items will be given a random
+            point
+            value.
+        </p>
+        <p>
+            If you hold in your character's inventory, chest, or ender chest any of the items that were randomly chosen
+            at
+            the beginning of the game, you will be awarded the points value of those items per item you hold.
+        </p>
+        <p>
+            Die? Someone finds your chest and takes the contents? You will lose those points.
+        </p>
+
+        <h2>Reward for winning</h2>
+
+        <table class="table">
+            <thead>
+                <th>Place</th>
+                <th>% of Pool Awarded</th>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1st</td>
+                    <td>10% - (0.5% of Pool Total Fee)</td>
+                </tr>
+
+                <tr>
+                    <td>2nd, 3rd, 4th, 5th</td>
+                    <td>Split 20%</td>
+                </tr>
+
+                <tr>
+                    <td>6th - 15th</td>
+                    <td>Split 20%</td>
+                </tr>
+
+                <tr>
+                    <td>16th - 35th</td>
+                    <td>Split 30%</td>
+                </tr>
+
+                <tr>
+                    <td>36th - 55th</td>
+                    <td>Split 20%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            Example: If there were 100 players, and each paid $10. The pool size would be $1000.
+        </p>
+
+        <p>
+            Each place from 1st to 100th would get paid as follows:
+        </p>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>1st</td>
+                    <td>$95</td>
+                </tr>
+
+                <tr>
+                    <td>2nd - 5th</td>
+                    <td>$50, 50, 50, 50</td>
+                </tr>
+
+                <tr>
+                    <td>6th - 15th:</td>
+                    <td>$20, 20 ,20 ,20, 20, 20, 20, 20, 20, 20</td>
+                </tr>
+
+                <tr>
+                    <td>16th - 35th:</td>
+                    <td>$15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15</td>
+                </tr>
+
+                <tr>
+                    <td>36th - 55th:</td>
+                    <td>$10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10</td>
+                </tr>
+
+                <tr>
+                    <td>Everyone else:</td>
+                    <td>
+                        $0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                        $0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<script>
+    document.getElementById('background').style.height = '150vh';
+</script>
+{% endblock content %}

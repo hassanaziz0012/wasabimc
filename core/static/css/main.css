@@ -1,0 +1,204 @@
+@font-face {
+    font-family: 'glicker';
+    src: url('/static/fonts/glicker-regular.ttf');
+}
+
+html, body {
+    font-family: 'glicker';
+    color: #fff;
+    box-sizing: border-box;
+}
+
+#background {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+}
+
+.navigation {
+    background-image: url('/static/images/background.png');
+    height: 150px;
+    margin: 0;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-link {
+    margin: auto 5px;
+}
+
+i.separator {
+    font-style: normal;
+}
+
+section {
+    padding-top: 9.5rem;
+    color: #000;
+}
+
+.game-modes .card {
+    margin: 0 10px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.game-modes .card .card-body {
+    background-color: #a6a5af;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.game-modes .card .card-body img {
+    width: 100px;
+}
+
+.game-modes .card .card-footer {
+    background-color: transparent;
+}
+
+.game-modes .card:focus .card-body {
+    background-color: #d2d2d8;
+}
+
+.btn-next {
+    padding: 0.5em 1.25em;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+}
+
+.btn-rounded {
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 40%;
+}
+
+.server-ip .address {
+    font-size: 24px;
+    padding: 0.25rem 5rem;
+    text-align: center;
+    background-color: rgb(80, 90, 37);
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    opacity: 0;
+}
+
+.footer-logo {
+    width: 15%;
+}
+
+.social-icons a {
+    text-decoration: none;
+}
+
+.social-icons img {
+    width: 32px;
+}
+
+
+/*  */
+#game-mode, #characters, #server {
+    position: relative;
+    transition: all 1s ease-in;
+}
+
+#characters, #server {
+    display: none;
+}
+#characters.to-select, #server.to-select {
+    display: block;
+}
+
+#game-mode.selected {
+    display: none;
+}
+
+#characters.selected {
+    display: none;
+}
+
+/* ANIMATIONS */
+header {
+    position: relative;
+    animation: fade-up 1000ms ease-in;
+}
+
+@keyframes fade-up {
+    0% {
+        top: 100px;
+        opacity: 0;
+    }
+    100% {
+        top: 0px;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-up-visibile {
+    0% {
+        top: 200px;
+        opacity: 0;
+    }
+    100% {
+        top: 150px;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-up-footer {
+    0% {
+        top: 150%;
+        opacity: 0;
+    }
+    100% {
+        top: 95%;
+        opacity: 1;
+    }
+}
+
+#background {
+    animation: fade-up-visibile 1000ms ease-in 500ms forwards;
+}
+
+.game-mode {
+    opacity: 0;
+    position: relative;
+    animation: fade-up 1000ms ease-in 1000ms forwards;
+}
+
+.how-to-play {
+    animation: fade-up 1000ms ease-in 1000ms forwards;
+}
+
+footer {
+    animation: fade-up-footer 1000ms ease-in 1500ms forwards;
+}
+
+/* HOW TO PLAY STYLES */
+.how-to-play {
+    padding-top: 5rem;
+    position: relative;
+    opacity: 0;
+}
+
+.how-to-play .sub-item {
+    margin-left: 1rem;
+}
+
+.how-to-play tr {
+    border-color: #000;
+}

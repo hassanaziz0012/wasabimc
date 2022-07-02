@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<img src="{% static '/images/hills.png' %}" alt="" id="background">
+<section id="game-mode" class="game-mode">
+    <div class="container">
+        
+        {% if auth_failed == True %}
+            <h1 class="auth-error text-center text-danger">Authentication failed! Please use an account that has a copy of Minecraft</h1>
+        {% endif %}
+
+        <h1>Choose Game Mode:</h1>
+        <div class="row game-modes d-flex align-items-start justify-content-center">
+            <button class="col-md-2 game-mode card" onclick="(() => selectGameMode('free'))()">
+                <div class="card-body">
+                    <h3 class="card-title">Wood</h3>
+                    <img src="{% static '/images/pickaxe-wood.png' %}" alt="Wood game mode"
+                        class="card-image img-fluid">
+                    <h2 class="card-price">Free</h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>Play risk free in Free Mode</p>
+                </div>
+            </button>
+
+            <button class="col-md-2 game-mode card" disabled>
+                <div class="card-body">
+                    <h3 class="card-title">Iron</h3>
+                    <img src="{% static '/images/pickaxe-iron.png' %}" alt="Wood game mode"
+                        class="card-image img-fluid">
+                    <h2 class="card-price">$5</h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>Iron Pickaxe</p>
+                </div>
+            </button>
+
+            <button class="col-md-2 game-mode card" disabled>
+                <div class="card-body">
+                    <h3 class="card-title">Gold</h3>
+                    <img src="{% static '/images/pickaxe-gold.png' %}" alt="Wood game mode"
+                        class="card-image img-fluid">
+                    <h2 class="card-price">$10</h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>Requires Gold Pickaxe NFT</p>
+                </div>
+            </button>
+
+            <button class="col-md-2 game-mode card" disabled>
+                <div class="card-body">
+                    <h3 class="card-title">Diamond</h3>
+                    <img src="{% static '/images/pickaxe-diamond.png' %}" alt="Wood game mode"
+                        class="card-image img-fluid">
+                    <h2 class="card-price">$20</h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>Requires Diamond Pickaxe NFT</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            {% if request.user.is_authenticated %}
+                <button class="game-in-progress btn btn-success btn-rounded" style="margin-right: 2.5em;">Game In Progress</button>
+                <button id="game-mode-selected" class="btn btn-danger btn-rounded btn-next disabled">NEXT</button>
+                <button class="game-in-progress btn btn-warning btn-rounded" style="margin-left: 2.5em;">Rewards</button>
+            {% else %}
+                <a href="{% url 'xbox-auth' %}">
+                    <button id="signin" class="btn btn-danger btn-rounded btn-next">
+                        Sign In to play
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+        <h2 id="gameModeSelectedError" class="text-center text-warning"></h2>
+    </div>
+</section>
+
+<section id="characters" class="game-mode">
+    <div class="container">
+        <h1>Choose Character:</h1>
+        <div class="row game-modes d-flex align-items-start justify-content-center">
+            <button class="col-md-2 character card" onclick="(() => selectCharacter('farmer'))()">
+                <div class="card-body">
+                    <h3 class="card-title">Farmer</h3>
+                    <img src="{% static '/images/hoe-iron.png' %}" alt="Wood game mode" class="card-image img-fluid">
+                    <h2 class="card-price"></h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>+30% Points for farmed items</p>
+                </div>
+            </button>
+
+            <button class="col-md-2 character card" onclick="(() => selectCharacter('miner'))()">
+                <div class="card-body">
+                    <h3 class="card-title">Miner</h3>
+                    <img src="{% static '/images/pickaxe-iron.png' %}" alt="Wood game mode"
+                        class="card-image img-fluid">
+                    <h2 class="card-price"></h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>+30% Points for mined items</p>
+                </div>
+            </button>
+
+            <button class="col-md-2 character card" onclick="(() => selectCharacter('warrior'))()">
+                <div class="card-body">
+                    <h3 class="card-title">Warrior</h3>
+                    <img src="{% static '/images/sword-iron.png' %}" alt="Wood game mode" class="card-image img-fluid">
+                    <h2 class="card-price"></h2>
+                </div>
+
+                <div class="card-footer">
+                    <p>+30% Points for kills</p>
+                </div>
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button class="game-in-progress btn btn-success btn-rounded" style="margin-right: 2.5em;">Game In Progress</button>
+            <button id="character-selected" class="btn btn-danger btn-next disabled" onclick="(() => registerUser())()">NEXT</button>
+            <button class="game-in-progress btn btn-warning btn-rounded" style="margin-left: 2.5em;">Rewards</button>
+        </div>
+        <h2 id="characterSelectedError" class="text-center text-warning"></h2>
+
+    </div>
+</section>
+
+<section id="server" class="game-mode">
+    <div class="container d-flex justify-content-center">
+        <div class="server-ip d-flex flex-column align-items-center">
+            <p class="address">wasabimn.com</p>
+
+            <h1>Server Opens in:</h1>
+            <h2 class="open-timer">03:43</h2>
+        </div>
+    </div>
+</section>
+
+<script>
+    let GAME_MODE;
+    let CHARACTER;
+    
+    function selectGameMode(mode) {
+        GAME_MODE = mode;
+
+        let allowPlayers = "{% if allowPlayers == True %}true{% else %}false{% endif %}";
+        console.log(allowPlayers);
+        if (allowPlayers == "true") {
+            document.getElementById("game-mode-selected").classList.remove("disabled");
+        }
+        else {
+            document.getElementById("gameModeSelectedError").innerText = "This server is currently not accepting players.";
+        }
+    }
+
+    function selectCharacter(character) {
+        CHARACTER = character;
+        document.querySelector('#character-selected').classList.remove('disabled')
+    }
+    
+    function registerUser() {
+        fetch('/register-character', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                game_mode: GAME_MODE,
+                character: CHARACTER
+            })
+        }).then(response => response.json()).then(data => {
+            if (data.success == true) {
+                document.getElementById('characters').classList.add('selected')
+                document.getElementById('server').classList.add('to-select')
+            }
+            else {
+                document.getElementById('characterSelectedError').innerText = data.error;
+            }
+        })
+    }
+
+
+</script>
+
+{% endblock content %}

@@ -1,0 +1,5 @@
+db.sqlite3
+core/__pycache__/
+wasabimc/__pycache__/
+core/migrations/__pycache__/
+core/microsoft/__pycache__/
