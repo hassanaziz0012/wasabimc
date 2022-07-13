@@ -1,6 +1,6 @@
 from django.urls import path
 from core.views import (
-    HomeView, HowToPlayView, PlayerUUIDView, UserLogoutView, XBoxAuthView, XboxAuthCallbackView, 
+    HomeView, HowToPlayView, PlayerUUIDView, RankingsView, UserLogoutView, XBoxAuthView, XboxAuthCallbackView, 
     RegisterCharacterView, GameStatusView
     )
 
@@ -14,4 +14,5 @@ urlpatterns = [
     path('microsoft/signout', UserLogoutView.as_view(), name="xbox-signout"),
     path('register-character', RegisterCharacterView.as_view(), name="register-character"),
     path('update-game-status', GameStatusView.as_view(), name="update-game-status"),
+    path('update-rankings', RankingsView.as_view(), name="update-rankings"),
 ]

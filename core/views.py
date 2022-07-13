@@ -109,3 +109,10 @@ class GameStatusView(View):
             'gameRunning': var_game.value,
             'allowPlayers': var_allow.value,
         }})
+
+
+class RankingsView(View):
+    def post(self, request):
+        rankings = request.POST.get('rankings')
+        print(rankings)
+        return JsonResponse({'success': True})
