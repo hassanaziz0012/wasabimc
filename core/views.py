@@ -111,6 +111,7 @@ class GameStatusView(View):
         }})
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class RankingsView(View):
     def post(self, request):
         rankings = request.POST.get('rankings')
