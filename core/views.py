@@ -7,6 +7,7 @@ from django.views import View
 from django.conf import settings
 from core.models import Variable, XBoxAccount
 from core.xbox import XBoxAuth
+import json
 
 
 class HomeView(View):
@@ -114,5 +115,5 @@ class GameStatusView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class RankingsView(View):
     def post(self, request):
-        print(request.POST)
+        print(json.loads(request.body))
         return JsonResponse({'success': True})
