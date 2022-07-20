@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect, reverse
 from django.views import View
 from django.conf import settings
-from core.models import Variable, XBoxAccount
+from core.models import Rankings, Variable, XBoxAccount
 from core.xbox import XBoxAuth
 import json
 
@@ -114,6 +114,23 @@ class GameStatusView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class RankingsView(View):
+    def get(self, request):
+        server_name = request.GET.get('server_name')
+        rankings = Rankings.objects.get(server=server_name)
+        context = {
+            'server_name': server_name,
+            'rankings': rankings.data
+        }
+        return render(request, 'rankings.html', context=context)
+
     def post(self, request):
         print(json.loads(request.body))
         return JsonResponse({'success': True})
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class RemoveWhitelistView(View):
+    def post(self, request):
+        server_name = request.GET.get('server_name')
+        return JsonResponse({'success': True, 'server_name': server_name})
+

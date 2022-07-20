@@ -37,3 +37,14 @@ class XBoxAccount(models.Model):
 
     def __repr__(self) -> str:
         return f'<XBoxAccount: {self.name}>'
+
+
+class Rankings(models.Model):
+    server = models.CharField(max_length=100)
+    data = models.JSONField(default=dict)
+
+    def __str__(self) -> str:
+        return f'{self.server}'
+        
+    def __repr__(self) -> str:
+        return f'<Rankings: {self.server}>'
