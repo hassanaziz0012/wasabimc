@@ -41,7 +41,7 @@ class XBoxAccount(models.Model):
 
 class Rankings(models.Model):
     server = models.CharField(max_length=100)
-    data = models.JSONField(default=dict)
+    data = models.JSONField(default=dict, blank=True)
 
     def __str__(self) -> str:
         return f'{self.server}'
