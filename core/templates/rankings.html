@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<img src="{% static '/images/hills.png' %}" alt="" id="background">
 
-<h1 class="text-white">Rankings</h1>
+<section class="rankings container" style="position: relative;">
+    <h1>Rankings</h1>
+    
+    <h2>Wood Server</h2>
+    <h2>Iron Server</h2>
+    <h2>Gold Server</h2>
+    <h2>Diamond Server</h2>
+</section>
+
 {% endblock content %}
 

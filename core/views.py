@@ -115,13 +115,8 @@ class GameStatusView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class RankingsView(View):
     def get(self, request):
-        server_name = request.GET.get('server_name')
-        rankings = Rankings.objects.get(server=server_name)
-        context = {
-            'server_name': server_name,
-            'rankings': rankings.data
-        }
-        return render(request, 'rankings.html', context=context)
+        rankings = Rankings.objects.all()
+        return render(request, 'rankings.html', context={'rankings': rankings})
 
     def post(self, request):
         print(json.loads(request.body))
