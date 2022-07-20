@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Variable, XBoxAccount
+from core.models import Rankings, Variable, XBoxAccount
 
 # Register your models here.
 @admin.register(Variable)
@@ -13,3 +13,7 @@ class XBoxAccountAdmin(admin.ModelAdmin):
     search_fields = ('name', 'gamertag', 'game_mode', 'character')
     list_filter = ('game_mode', 'character')
     
+
+@admin.register(Rankings)
+class RankingsAdmin(admin.ModelAdmin):
+    list_display = ('server',)
