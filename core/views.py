@@ -84,13 +84,12 @@ class UserLogoutView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class RegisterCharacterView(View):
     def post(self, request):
-        if not request.user.is_authenticated:
-            return JsonResponse({'success': False})
+        gamertag = request.GET.get('gamertag')
 
         game_mode = request.POST.get('game_mode')
         character = request.POST.get('character')
 
-        xbox: XBoxAccount = XBoxAccount.objects.get(xbox_user=request.user)
+        xbox: XBoxAccount = XBoxAccount.objects.get(gamertag=gamertag)
         xbox.game_mode = game_mode
         xbox.character = character
         xbox.save()
