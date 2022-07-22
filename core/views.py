@@ -89,6 +89,9 @@ class RegisterCharacterView(View):
         game_mode = request.POST.get('game_mode')
         character = request.POST.get('character')
 
+        print(request.GET)
+        print(request.POST)
+
         xbox: XBoxAccount = XBoxAccount.objects.get(gamertag=gamertag)
         xbox.game_mode = game_mode
         xbox.character = character
