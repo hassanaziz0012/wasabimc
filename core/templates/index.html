@@ -168,10 +168,10 @@
     }
     
     function registerUser() {
-        fetch('/register-character', {
+        fetch('/register-character?gamertag={{ gamertag }}', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 game_mode: GAME_MODE,

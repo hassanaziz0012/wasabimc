@@ -18,11 +18,18 @@ class HomeView(View):
         allowPlayers = True if Variable.objects.get(name='allowPlayers').value == 'true' else False
         gameRunning = True if Variable.objects.get(name='gameRunning').value == 'true' else False
 
+        if request.user.is_authenticated:
+            xbox = XBoxAccount.objects.get(user=request.user)
+            gamertag = xbox.gamertag
+        else:
+            gamertag = None
+
         return render(request, 'index.html', context={
             'auth_failed': auth_failed, 
             'registered': registered, 
             'allowPlayers': allowPlayers,
-            'gameRunning': gameRunning
+            'gameRunning': gameRunning,
+            'gamertag': gamertag
             })
 
 
