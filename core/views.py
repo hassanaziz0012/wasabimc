@@ -85,12 +85,10 @@ class UserLogoutView(View):
 class RegisterCharacterView(View):
     def post(self, request):
         gamertag = request.GET.get('gamertag')
+        data = json.loads(request.body)
 
-        game_mode = request.POST.get('game_mode')
-        character = request.POST.get('character')
-
-        print(request.GET)
-        print(request.POST)
+        game_mode = data.get('game_mode')
+        character = data.get('character')
 
         xbox: XBoxAccount = XBoxAccount.objects.get(gamertag=gamertag)
         xbox.game_mode = game_mode
