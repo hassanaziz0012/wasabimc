@@ -19,7 +19,7 @@ class HomeView(View):
         gameRunning = True if Variable.objects.get(name='gameRunning').value == 'true' else False
 
         if request.user.is_authenticated:
-            xbox = XBoxAccount.objects.get(user=request.user)
+            xbox = XBoxAccount.objects.get(xbox_user=request.user)
             gamertag = xbox.gamertag
         else:
             gamertag = None
