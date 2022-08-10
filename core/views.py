@@ -133,6 +133,6 @@ class RankingsView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class RemoveWhitelistView(View):
     def post(self, request):
-        server_name = request.GET.get('server_name')
+        server_name = request.POST.get('server_name')
         return JsonResponse({'success': True, 'server_name': server_name})
 
