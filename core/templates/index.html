@@ -12,7 +12,7 @@
 
         <h1>Choose Game Mode:</h1>
         <div class="row game-modes d-flex align-items-start justify-content-center">
-            <button class="col-md-2 game-mode card" onclick="(() => registerUser())()">
+            <button class="col-md-2 game-mode card" onclick="(() => selectGameMode('wood'))()">
                 <div class="card-body">
                     <h3 class="card-title">Wood</h3>
                     <img src="{% static '/images/pickaxe-wood.png' %}" alt="Wood game mode"
@@ -174,8 +174,8 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                game_mode: "free",
-                character: "farmer",
+                game_mode: GAME_MODE,
+                character: CHARACTER,
             })
         }).then(response => response.json()).then(data => {
             if (data.success == true) {

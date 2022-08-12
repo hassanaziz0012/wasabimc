@@ -134,5 +134,10 @@ class RankingsView(View):
 class RemoveWhitelistView(View):
     def post(self, request):
         server_name = json.loads(request.body).get('server_name')
+        
+        for xbox in XBoxAccount.objects.filter(game_mode=server_name):
+            xbox.game_mode = None
+            xbox.character=None
+            
         return JsonResponse({'success': True, 'server_name': server_name})
 
