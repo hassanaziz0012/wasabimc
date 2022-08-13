@@ -137,7 +137,8 @@ class RemoveWhitelistView(View):
         
         for xbox in XBoxAccount.objects.filter(game_mode=server_name):
             xbox.game_mode = None
-            xbox.character=None
+            xbox.character = None
+            xbox.save()
             
         return JsonResponse({'success': True, 'server_name': server_name})
 
