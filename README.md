@@ -1,4 +1,4 @@
-A website for a minecraft server.
+A website for a minecraft server. Unfinished as the dude lost interest halfway.
 
 ## Author
 - Hassan Aziz
